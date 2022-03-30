@@ -4,6 +4,6 @@ from . import views
 
 urlpatterns= [
     path('',views.home),
-    path('add',views.CreateAppliedUser.as_view()),
-    path('view',views.AppliedUserView.as_view()),
+    path('addUser',views.CreateAppliedUser.as_view()),
+    path('viewUser',views.AppliedUserView.as_view()),
 ]

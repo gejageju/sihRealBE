@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'questionBank.apps.QuestionbankConfig',
+    'appliedUser.apps.ApplieduserConfig',
     'rest_framework',
     'corsheaders'
 ]
