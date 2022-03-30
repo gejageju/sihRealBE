@@ -5,8 +5,8 @@ from django.http import HttpResponse
 from http.client import HTTPResponse
 from django.shortcuts import render
 from rest_framework import generics,status
-from .models import AppliedUser
-from .serializers import AppliedUserSerializer
+from .models import AppliedUser, VerifiedUser
+from .serializers import AppliedUserSerializer, VerifiedUserSerializer
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from .serializers import AppliedUserSerializer
@@ -30,5 +30,16 @@ class AppliedUserView(generics.ListAPIView):
     serializer_class = AppliedUserSerializer
 
 
+class VerifyUser(APIView):
+    def post(self,request):
+        serializer=VerifiedUserSerializer(data=request.data)
+        #serializer2=AppliedUserSerializer(data=request.data)
+        id=request.data["id"]
+        if serializer.is_valid(): #and serializer2.is_valid():
+            serializer.save()
+            obj= AppliedUser.objects.get(id=id)
+            obj.delete()
+            return Response(status=status.HTTP_201_CREATED)
+        return Response(status=status.HTTP_400_BAD_REQUEST)
 
  
